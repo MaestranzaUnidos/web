@@ -1,0 +1,60 @@
+{% extends "sitio/layout.html" %}
+
+{% block content %}
+<section class="row my-5 container">
+    <div class="container mt-4 text-start"> <!-- Cambia text-start a text-center para centrar -->
+    <a href="{% url 'SITIO:productos_por_categoria' categoria_actual.id_categoria %}" class="btn btn-success mb-3">
+        ← Volver a Categorías
+    </a>
+</div>
+    <div class="col-10 mx-auto">
+        <div class="row border">
+
+            <!-- Imagen -->
+            <div class="col-md-5 p-0">
+                <img src="{{ MEDIA_URL }}{{ producto.imagen.url }}" alt="{{ producto.titulo }}" class="img-fluid w-100">
+            </div>
+
+            <!-- Texto -->
+            <div class="col-md-7 p-4 d-flex flex-column justify-content-between">
+                <div class="detalle-producto-content__text">
+                    <h1 class="display-4 text-capitalize">{{ producto.titulo }}</h1>
+
+                    <h2 class="display-4 text-capitalize mb-3">Categoria: {{ producto.categoria.descripcion }}</h2>
+
+                    <p>{{ producto.descripcion.capitalize }}</p>
+
+                    {% if producto.fecha_vencimiento %}
+                        <p><strong>Fecha de Vencimiento:</strong> {{ producto.fecha_vencimiento }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Detalles adicionales como precio, stock y botón de agregar al carrito -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="m-0">
+                        <strong>Precio:</strong>
+                        ${{ producto.precio }}
+                    </p>    
+                    <p class="m-0">
+                        <strong>Stock:</strong>
+                        {{ producto.stock }}
+                    </p>
+
+                    <!-- Formulario para agregar al carrito -->
+                    <form action="{% url 'SITIO:carrito_save' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="producto_id" value="{{ producto.id_producto }}">
+                        {% if user.is_superuser or not user.is_authenticated %}
+                            <button type="submit" class="btn btn-success" disabled>Agregar al carrito</button>
+                        {% else %}
+                            <button type="submit" class="btn btn-success">Agregar al carrito</button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+{% endblock %}

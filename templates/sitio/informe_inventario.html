@@ -1,0 +1,52 @@
+<!-- templates/sitio/informe_inventario.html -->
+{% extends "sitio/layout.html" %}
+
+{% block content %}
+<main class="container my-5">
+    <h2 class="text-center">Informe de Inventario</h2>
+    
+    <h3>Productos con Bajo Stock</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Stock</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos_bajo_stock %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ producto.titulo }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.precio }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h3>Todos los Productos</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Título</th>
+                <th>Stock</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ producto.titulo }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.precio }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

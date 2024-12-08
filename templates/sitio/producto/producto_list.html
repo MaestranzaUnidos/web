@@ -1,0 +1,34 @@
+{% extends "sitio/layout.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listado de Productos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Listado de Productos Agregados</h1>
+        <div class="row">
+            {% for producto in productos %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.titulo }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.titulo }}</h5>
+                        <p class="card-text">{{ producto.descripcion }}</p>
+                        <p class="card-text"><strong>Precio: ${{ producto.precio }}</strong></p>
+                        <p class="card-text"><strong>Stock: {{ producto.stock }}</strong></p>
+                        {% if producto.fecha_vencimiento %}
+                        <p class="card-text"><strong>Fecha de Vencimiento: {{ producto.fecha_vencimiento }}</strong></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

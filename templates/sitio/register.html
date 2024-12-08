@@ -1,0 +1,66 @@
+{% extends "sitio/layout.html" %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center vh-100">
+    <div class="col-md-6 col-lg-4">
+        <!-- MENSAJES -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>{{ message }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- FORMULARIO DE REGISTRO -->
+        <div class="card shadow-lg p-4">
+            <div class="text-center mb-4">
+                <h2 class="text-uppercase font-weight-bold text-success" style="letter-spacing: 1.5px;">Registrarse</h2>
+                <p class="text-muted">¡Únete a nosotros hoy!</p>
+            </div>
+
+            <form action="" method="POST" class="animate__animated animate__fadeIn animate__fast">
+                {% csrf_token %}
+                
+                <!-- EMAIL -->
+                <div class="form-group">
+                    <label for="email" class="font-weight-bold">Email</label>
+                    <input type="email" class="form-control form-control-lg" id="email" name="email" placeholder="Correo electrónico" required>
+                    <small class="form-text text-muted">Debe contener un @ y un dominio válido.</small>
+                </div>
+
+                <!-- USUARIO -->
+                <div class="form-group">
+                    <label for="usuario" class="font-weight-bold">Usuario</label>
+                    <input type="text" class="form-control form-control-lg" id="usuario" name="username" placeholder="Nombre de usuario" required>
+                    <small class="form-text text-muted">Máximo 150 caracteres. Solo letras, números y los símbolos @/./+/-/_</small>
+                </div>
+
+                <!-- CONTRASEÑA -->
+                <div class="form-group">
+                    <label for="password" class="font-weight-bold">Contraseña</label>
+                    <input type="password" class="form-control form-control-lg" id="password" name="password1" placeholder="Contraseña" required>
+                    <small class="form-text text-muted">Debe tener al menos 8 caracteres.</small>
+                </div>
+
+                <!-- REPETIR CONTRASEÑA -->
+                <div class="form-group">
+                    <label for="passwordRepeat" class="font-weight-bold">Repetir Contraseña</label>
+                    <input type="password" class="form-control form-control-lg" id="passwordRepeat" name="password2" placeholder="Confirmar contraseña" required>
+                    <small class="form-text text-muted">Repita la contraseña para confirmar.</small>
+                </div>
+
+                <!-- BOTÓN -->
+                <button type="submit" class="btn btn-lg btn-block btn-success text-uppercase font-weight-bold shadow-sm" style="letter-spacing: 1px;">Registrarse</button>
+            </form>
+
+            <div class="text-center mt-4">
+                <p class="text-muted">¿Ya tienes una cuenta? <a href="{% url 'login' %}" class="text-success font-weight-bold">Inicia Sesión</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

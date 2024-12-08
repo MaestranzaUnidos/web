@@ -1,0 +1,185 @@
+.nav-logo{
+    font-size: 1.5em;
+}
+
+.logo-empresa-footer{
+    font-size: 1.3em;
+}
+
+.nav-link{
+    font-size: 1.1em;
+    margin: 0 5px;
+}
+
+textarea{
+    resize: none;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+body {
+    margin: 0;
+    padding-bottom: 80px; /* Ajusta este valor al tamaño del footer */
+}
+
+footer {
+    position: fixed; /* Mantén el footer siempre visible */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030; /* Asegura que el footer esté encima del contenido */
+    background-color: #f8f9fa; /* Color de fondo del footer */
+    border-top: 1px solid #e7e7e7; /* Línea superior opcional */
+    padding: 10px;
+    text-align: center;
+}
+
+
+.content {
+    margin-bottom: 50px; /* Altura del footer */
+}
+
+
+.card-img-3-producto-home, .card-img-producto-home {
+    width: 280px; /* Ancho fijo */
+    height: 500px; /* Altura fija */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+}
+
+.card-img-3-producto-home img, .card-img-producto-home img {
+    max-width: 100%;
+    max-height: 150px; /* Altura máxima para imágenes */
+    object-fit: contain; /* Ajusta las proporciones de las imágenes */
+    margin-bottom: 10px;
+}
+
+.card-body-3-productos-home, .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%; /* Asegura que use toda la altura disponible */
+}
+
+.card-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    min-height: 50px; /* Altura mínima */
+    max-height: 60px; /* Altura máxima */
+    margin: 10px 0;
+}
+
+.card-text {
+    font-size: 0.9em;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Máximo 2 líneas */
+    -webkit-box-orient: vertical;
+    height: 60px; /* Altura fija */
+    margin-bottom: 10px;
+}
+
+
+.btn {
+    margin-top: auto; /* Empuja los botones al final del contenedor */
+}
+
+.productos-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra las tarjetas */
+    gap: 30px; /* Espaciado entre las tarjetas */
+}
+
+.navbar {
+    z-index: 1030;
+    position: relative;
+    background-color: #fff;
+}
+
+.navbar .dropdown-menu {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.busqueda-content__titulo h2{
+    font-size: 3em;
+}
+
+.detalle-producto-content__text h1{
+    font-size: 3em;
+}
+
+.detalle-producto-content__text h2{
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.title-form-register{
+    font-size: 2.8em;
+}
+
+.warning-message {
+    color: red;
+}
+
+.btn-verde {
+    background-color: #21E73B; /* Cambia este color al verde de tu sitio */
+    color: white;
+    border: none;
+}
+
+.btn-verde:hover {
+    background-color: #1CB831; /* Un color más oscuro para el efecto hover */
+}
+
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+
+.table {
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    text-align: center;
+    padding: 10px;
+}
+
+.carousel-inner img {
+    width: 100%; /* La imagen siempre ocupará el ancho completo */
+    height: 340px; /* Fija una altura consistente */
+    object-fit: cover; /* Evita deformaciones y recorta la imagen si es necesario */
+    transition: none; /* Elimina transiciones no deseadas */
+}
+
+.carousel {
+    max-width: 1200px; /* Ajusta según el diseño de tu página */
+    margin: auto;
+}
+
+.carousel-item {
+    transition: transform 0.6s ease, opacity 0.6s ease; /* Suaviza el cambio de imágenes */
+}
+
+
+
+
+

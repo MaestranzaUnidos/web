@@ -1,0 +1,30 @@
+{% extends 'sitio/layout.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Confirmar Dirección de Envío</h2>
+    <form method="POST" class="mx-auto" style="max-width: 600px;">
+        {% csrf_token %}
+        
+        <!-- Dirección -->
+        <div class="form-group">
+            <label for="{{ form.direccion.id_for_label }}" class="font-weight-bold">Dirección:</label>
+            {{ form.direccion }}
+        </div>
+
+        <!-- Región -->
+        <div class="form-group">
+            <label for="{{ form.region.id_for_label }}" class="font-weight-bold">Región:</label>
+            {{ form.region }}
+        </div>
+
+        <!-- Comuna -->
+        <div class="form-group">
+            <label for="{{ form.comuna.id_for_label }}" class="font-weight-bold">Comuna:</label>
+            {{ form.comuna }}
+        </div>
+
+        <button type="submit" class="btn btn-success btn-block mt-4">Confirmar y Proceder al Pago</button>
+    </form>
+</div>
+{% endblock %}

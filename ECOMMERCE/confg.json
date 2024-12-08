@@ -1,0 +1,10 @@
+{
+
+    "debug":true,
+    "base_url":"http://127.0.0.1:8000/",
+    "user":"root",
+    "password":"juan2001",
+    "server":"localhost",
+    "bd":"beautifulgreenalways"
+   
+}

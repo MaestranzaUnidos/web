@@ -1,0 +1,30 @@
+/* Personalizar el fondo y el header */
+#header {
+    background-color: #005f73;
+}
+
+#site-name {
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+/* Cambiar los estilos de los botones */
+input[type=submit], .button {
+    background-color: #94d2bd;
+    color: #023047;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover, .button:hover {
+    background-color: #0a9396;
+}
+
+/* Personalizar el pie de página */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #ee9b00;
+    color: white;
+}

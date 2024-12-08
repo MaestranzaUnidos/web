@@ -1,0 +1,32 @@
+{% extends "sitio/layout.html" %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2 class="text-center">Confirmación de Compra</h2>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h4 class="card-title">Resumen de la Orden</h4>
+                        <p><strong>Número de Orden:</strong> {{ orden.numero_orden }}</p>
+                        <p><strong>Total:</strong> ${{ orden.total }}</p>
+                        <p><strong>Dirección de Envío:</strong></p>
+                        <ul>
+                            <li>{{ orden.direccion_envio.direccion }}</li>
+                            <li>{{ orden.direccion_envio.ciudad }}, {{ orden.direccion_envio.region }}</li>
+                            <li>{{ orden.direccion_envio.codigo_postal }}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p class="lead">Haz clic en el botón para proceder con el pago.</p>
+                    <form method="POST" action="{% url 'SITIO:iniciar_pago' orden.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-lg">Proceder al Pago</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

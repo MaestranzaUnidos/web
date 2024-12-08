@@ -1,0 +1,113 @@
+{% extends 'sitio/layout.html' %}
+
+{% block content %}
+<section class="row my-5 container mx-auto">
+
+    <!-- MENSAJE DE ERROR -->
+    {% if error_message %}
+        <div class="alert alert-danger alert-dismissible fade show col-12" role="alert">
+            <strong>{{ error_message }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    {% if okey_message %}
+        <div class="alert alert-success alert-dismissible fade show col-12" role="alert">
+            <strong>{{ okey_message }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+    <!-- TITULO -->
+    <div class="col-12">
+        <h2 class="display-4 text-center mb-5">Editar producto</h2>
+    </div>
+
+    <!-- FORMULARIO -->
+    <form action="" method="post" enctype="multipart/form-data" class="w-100 col-12 bg-light p-4 shadow rounded">
+
+        {% csrf_token %}
+
+        <!-- NOMBRE PRODUCTO -->
+        <div class="form-group">
+            <label for="titulo">Nombre del Producto</label>
+            <input class="form-control form-control-lg" type="text" name="titulo" placeholder="Ingrese el nombre del producto..." value="{{ producto.titulo }}" required>
+        </div>
+
+        <div class="row">
+
+            <!-- IMAGEN -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="imagen">Imagen del Producto</label>
+                    {% if producto.imagen %}
+                        <div class="mb-3">
+                            <img src="{{ producto.imagen.url }}" alt="Imagen actual" class="img-thumbnail w-100 mb-2">
+                            <small class="text-muted">Imagen actual</small>
+                        </div>
+                    {% endif %}
+                    <input type="file" class="form-control-file" name="imagen" id="imagen" placeholder="Ingrese la imagen...">
+                    <small class="form-text text-muted">Si no seleccionas una imagen, se mantendrá la actual.</small>
+                </div>
+            </div>
+
+            <!-- CATEGORIA Y DESCRIPCIÓN -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="categoria">Categoría</label>
+                    <select class="custom-select" name="categoria" required>
+                        <option value="" selected>-- Seleccione la categoria --</option>
+                        {% for categoria in categorias %}
+                            <option value="{{ categoria.id_categoria }}" {% if producto.categoria.id_categoria == categoria.id_categoria %}selected{% endif %}>
+                                {{ categoria.descripcion }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción del Producto</label>
+                    <textarea class="form-control" name="descripcion" rows="4" required>{{ producto.descripcion }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- PRECIO Y STOCK -->
+            <div class="col-md-6">
+                <div class="row">
+                    <!-- PRECIO -->
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="precio">Precio</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="number" class="form-control" name="precio" placeholder="0.00" value="{{ producto.precio }}" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STOCK -->
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="stock">Stock</label>
+                            <input type="number" class="form-control" name="stock" placeholder="Cantidad en stock" value="{{ producto.stock }}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTÓN -->
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-success btn-lg">Actualizar Producto</button>
+        </div>
+
+    </form>
+</section>
+{% endblock %}

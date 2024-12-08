@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% extends "sitio/layout.html" %}
+{% block content %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proveedores y Productos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .proveedor-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Proveedores y sus Productos</h1>
+        {% for proveedor in proveedores %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <span>{{ proveedor.nombre }}</span>
+                <span class="proveedor-info">
+                    <strong>Teléfono:</strong> {{ proveedor.telefono }} | <strong>Correo: </strong> <a href="mailto:{{ proveedor.email }}">{{ proveedor.email}}</a>
+                </span>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for producto in proveedor.productos.all %}
+                <li class="list-group-item">
+                    {{ producto.titulo }} - {{ producto.precio }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "sitio/layout.html" %}
+
+{% block content %}
+<main class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-success text-white text-center">
+                    <h2>Confirmación de Pago Exitosa</h2>
+                </div>
+                <div class="card-body text-center">
+                    <p class="lead">¡Gracias por tu compra, <strong>{{ usuario.username }}</strong>!</p>
+                    <hr>
+                    <div class="mb-4">
+                        <p class="mb-2"><strong>Número de Orden:</strong> {{ orden.numero_orden }}</p>
+                        <p class="mb-2"><strong>Total Pagado:</strong> ${{ orden.total|floatformat:0 }}</p>
+                        <p class="mb-2"><strong>Estado de la Transacción:</strong> <span class="badge bg-success">{{ response_data.status }}</span></p>
+                        <p class="mb-2"><strong>Tipo de Envío:</strong> 
+                            {% if orden.direccion_envio %}
+                                Despacho a Domicilio
+                            {% else %}
+                                Retiro en Tienda
+                            {% endif %}
+                        </p>
+                    </div>
+                    <hr>
+                    
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'SITIO:producto_index' %}" class="btn btn-primary btn-lg">Volver a la tienda</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

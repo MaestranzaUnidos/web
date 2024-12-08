@@ -1,0 +1,30 @@
+{% extends 'sitio/layout.html' %}
+
+{% block content %}
+<h1>Actualizar Estado del Pedido</h1>
+<p><strong>Pedido:</strong> {{ orden.numero_orden }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    {% if orden.direccion_envio is None %}
+        <!-- Formulario para Retiro en Tienda -->
+        <label for="estado_retiro">Estado para Retiro en Tienda:</label>
+        <select id="estado_retiro" name="estado_retiro" required>
+            <option value="No retirado" {% if orden.estado_retiro == "No retirado" %}selected{% endif %}>No retirado</option>
+            <option value="Retirado" {% if orden.estado_retiro == "Retirado" %}selected{% endif %}>Retirado</option>
+            <option value="En espera" {% if orden.estado_retiro == "En espera" %}selected{% endif %}>En espera</option>
+        </select>
+    {% else %}
+        <!-- Formulario para Envío a Domicilio -->
+        <label for="estado_envio">Estado para Envío a Domicilio:</label>
+        <select id="estado_envio" name="estado_envio" required>
+            <option value="En espera" {% if orden.estado_envio == "En espera" %}selected{% endif %}>En espera</option>
+            <option value="En camino" {% if orden.estado_envio == "En camino" %}selected{% endif %}>En camino</option>
+            <option value="Entregado" {% if orden.estado_envio == "Entregado" %}selected{% endif %}>Entregado</option>
+        </select>
+    {% endif %}
+    <br><br>
+    <button type="submit" class="btn btn-success">Actualizar</button>
+    <a href="{% url 'SITIO:mis_pedidos' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

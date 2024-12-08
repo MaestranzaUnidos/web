@@ -1,0 +1,33 @@
+{% extends 'sitio/layout.html' %}
+
+{% block content %}
+
+<h2>Detalles del Pedido</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for producto in productos_ordenados %}
+        <tr>
+            <td>{{ producto.producto.nombre }}</td>
+            <td>{{ producto.cantidad }}</td>
+            <td>${{ producto.precio_unitario|floatformat:2 }}</td>
+            <td>${{ producto.subtotal|floatformat:2 }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No hay productos en este pedido.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p><strong>Total del Pedido:</strong> ${{ pedido.total|floatformat:2 }}</p>
+<a href="{% url 'SITIO:mis_pedidos' %}" class="btn btn-primary">Volver a Mis Pedidos</a>
+{% endblock %}

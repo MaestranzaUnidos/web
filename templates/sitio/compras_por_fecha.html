@@ -1,0 +1,54 @@
+{% extends 'sitio/layout.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h3>Compras por Fecha</h3>
+    <form method="get" class="form-inline mb-4">
+        <div class="form-group mr-2">
+            <label for="fecha">Seleccionar Fecha:</label>
+            <input type="date" id="fecha" name="fecha" value="{{ fecha }}" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </form>
+    
+    {% if total_compras %}
+        <div class="alert alert-info mt-3">
+            <strong>Total de Compras del Día: ${{ total_compras }}</strong>
+        </div>
+    {% endif %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Número de Orden</th>
+                <th>Usuario</th>
+                <th>Total</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Productos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for orden in ordenes %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ orden.numero_orden }}</td>
+                    <td>{{ orden.usuario.username }}</td>
+                    <td>${{ orden.total }}</td>
+                    <td>{{ orden.fecha_creacion }}</td>
+                    <td>{{ orden.estado }}</td>
+                    <td>
+                        {% for detalle in orden.detalles.all %}
+                            {{ detalle.producto.titulo }} (x{{ detalle.cantidad }})<br>
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}

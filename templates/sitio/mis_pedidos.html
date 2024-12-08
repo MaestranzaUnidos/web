@@ -1,0 +1,98 @@
+{% extends 'sitio/layout.html' %}
+{% block content %}
+<h2>Mis Pedidos</h2>
+
+<!-- Mostrar mensajes -->
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<h2>Pedidos para Retiro en Tienda</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Número de Orden</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Estado</th>
+            {% if request.user.is_superuser %}
+                <th>Acciones</th>
+            {% endif %}
+        </tr>
+    </thead>
+    
+    <tbody>
+        {% for pedido in pedidos_retiro %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ pedido.numero_orden }}</td>
+            <td>{{ pedido.fecha_creacion|date:"d-m-Y H:i" }}</td>
+            <td>{{ pedido.total }}</td>
+            <td>{{ pedido.estado_retiro }}</td>
+            {% if request.user.is_superuser %}
+            <td>
+                {% if request.user.is_superuser %}
+                <a href="{% url 'SITIO:actualizar_estado' pedido.id_orden %}" class="btn btn-primary">Actualizar Estado</a>
+                {% endif %}
+                <a href="{% url 'SITIO:detalle_pedido' pedido.id_orden %}" class="btn btn-secondary">Ver Detalles</a>
+            </td>
+            {% endif %}
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">No tienes pedidos para retiro en tienda.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2>Pedidos para Envío a Domicilio</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Número de Orden</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th>Dirección</th>
+            {% if request.user.is_superuser %}
+                <th>Acciones</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in pedidos_envio %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ pedido.numero_orden }}</td>
+            <td>{{ pedido.fecha_creacion|date:"d-m-Y H:i" }}</td>
+            <td>{{ pedido.total }}</td>
+            <td>{{ pedido.estado_envio }}</td>
+            <td>{{ pedido.direccion_envio.direccion }}</td>
+            {% if request.user.is_superuser %}
+            <td>
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'SITIO:actualizar_estado' pedido.id_orden %}" class="btn btn-primary">Actualizar Estado</a>
+                {% endif %}
+                <a href="{% url 'SITIO:detalle_pedido' pedido.id_orden %}" class="btn btn-secondary">Ver Detalles</a>
+            </td>
+            {% endif %}
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">No tienes pedidos para envío a domicilio.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
